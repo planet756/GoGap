@@ -1,0 +1,28 @@
+{{ define "fund_table" }}
+<table class="fund-table" data-fund-table>
+  <colgroup><col/><col/><col/><col/><col/><col/><col/></colgroup>
+  <caption>基金折溢价监控表</caption>
+  <thead>
+    <tr>
+      <th scope="col">基金名称</th>
+      <th scope="col">申购/赎回</th>
+      <th scope="col" class="numeric"><button class="sort-header-button" type="button" data-sort-button data-sort-key="navChangePercent" data-sort-direction="none" aria-sort="none"><span>净值/估值</span><svg class="sort-arrow" viewBox="0 0 12 16" aria-hidden="true"><path class="sort-arrow__up" d="M6 1 2 6h8L6 1Z"/><path class="sort-arrow__down" d="M6 15 2 10h8l-4 5Z"/></svg></button></th>
+      <th scope="col" class="numeric"><button class="sort-header-button" type="button" data-sort-button data-sort-key="quoteChangePercent" data-sort-direction="none" aria-sort="none"><span>场内价格</span><svg class="sort-arrow" viewBox="0 0 12 16" aria-hidden="true"><path class="sort-arrow__up" d="M6 1 2 6h8L6 1Z"/><path class="sort-arrow__down" d="M6 15 2 10h8l-4 5Z"/></svg></button></th>
+      <th scope="col" class="numeric"><button class="sort-header-button" type="button" data-sort-button data-sort-key="premiumRate" data-sort-direction="none" aria-sort="none"><span>折溢价率</span><svg class="sort-arrow" viewBox="0 0 12 16" aria-hidden="true"><path class="sort-arrow__up" d="M6 1 2 6h8L6 1Z"/><path class="sort-arrow__down" d="M6 15 2 10h8l-4 5Z"/></svg></button></th>
+      <th scope="col" class="numeric">换手率/成交额</th>
+      <th scope="col">自选</th>
+    </tr>
+  </thead>
+  <tbody data-fund-rows>
+    <tr class="empty-row" data-empty-row>
+      <td colspan="7">
+        <div class="empty-state">
+          <span class="empty-state__orb" aria-hidden="true"></span>
+          <strong>暂无匹配基金</strong>
+          <span>请等待数据拉取完成，或调整分类、搜索、自选、限额筛选。</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{{ end }}

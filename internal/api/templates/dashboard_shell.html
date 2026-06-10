@@ -1,0 +1,67 @@
+{{ define "dashboard_shell" }}
+<main class="app-shell" id="app" data-dashboard-shell>
+  <section class="hero-panel" aria-labelledby="dashboard-title">
+    <h1 id="dashboard-title" class="hero-panel__title">GoGap<span class="hero-panel__sep">/</span><span class="hero-panel__sub">基金折溢价看板</span></h1>
+  </section>
+
+  <section class="filter-panel" aria-label="基金分类筛选">
+    <div class="filter-panel__controls">
+      <nav class="chip-group" aria-label="基金分类筛选">
+        <button class="category-chip" type="button" data-category-all aria-pressed="true">全部<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="QDII" aria-pressed="false">QDII<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="商品" aria-pressed="false">商品<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="香港" aria-pressed="false">香港<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="主动LOF" aria-pressed="false">主动LOF<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="指数LOF" aria-pressed="false">指数LOF<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="ETF" aria-pressed="false">ETF<span class="category-chip__count">0</span></button>
+        <button class="category-chip" type="button" data-category="债券货币" aria-pressed="false">债券货币<span class="category-chip__count">0</span></button>
+      </nav>
+      <div class="control-strip" aria-label="列表筛选与排序">
+        <label class="search-control" for="fund-search">
+          <input id="fund-search" type="search" data-search-input placeholder="输入代码或名称" autocomplete="off" />
+          <button class="search-button" type="button" data-search-submit>搜索</button>
+        </label>
+        <label class="select-control" for="fund-sort">
+          <span>排序</span>
+          <select id="fund-sort" data-sort-select>
+            <option value="">默认排序</option>
+            <option value="premiumRate:desc">溢价率从高到低</option>
+            <option value="premiumRate:asc">溢价率从低到高</option>
+            <option value="quoteChangePercent:desc">场内涨跌幅从高到低</option>
+            <option value="quoteChangePercent:asc">场内涨跌幅从低到高</option>
+            <option value="navChangePercent:desc">净值涨跌幅从高到低</option>
+            <option value="navChangePercent:asc">净值涨跌幅从低到高</option>
+            <option value="turnoverAmount:desc">成交额从高到低</option>
+            <option value="turnoverAmount:asc">成交额从低到高</option>
+          </select>
+        </label>
+        <button class="watchlist-filter" type="button" data-purchase-limit-only aria-pressed="false">仅看限额</button>
+        <button class="watchlist-filter" type="button" data-watchlist-only aria-pressed="false">仅看自选</button>
+        <button class="watchlist-filter" type="button" data-filter-clear>清除</button>
+        <button class="refresh-button watchlist-filter" type="button" data-snapshot-refresh>刷新</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="data-panel" aria-labelledby="table-title">
+    <div class="data-panel__header">
+      <div class="section-heading">
+        <p class="eyebrow">Snapshot</p>
+        <h2 id="table-title">折溢价列表</h2>
+      </div>
+      <div class="status-stack" aria-label="数据源状态">
+        <span class="status-badge status-badge--loading" data-source-status>加载中</span>
+        <span class="status-badge status-badge--loading" data-stale-status>等待刷新</span>
+      </div>
+    </div>
+
+    <div class="table-scroll" role="region" aria-label="基金折溢价表格" tabindex="0">
+      {{ template "fund_table" . }}
+    </div>
+  </section>
+
+  <footer class="disclaimer" data-compliance-disclaimer>
+    数据来源于公开信息；交易时段折溢价可基于盘中估值与最新场内价格计算，非交易时段基于官方已披露净值；不构成投资建议；投资有风险。
+  </footer>
+</main>
+{{ end }}

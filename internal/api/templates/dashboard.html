@@ -1,0 +1,17 @@
+{{ define "dashboard" }}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GoGap 基金折溢价查看器 — 聚合官方净值与场内价格，实时查看折溢价率、涨跌幅和成交额。" />
+    <meta name="theme-color" content="#f8f9fb" />
+    <title>GoGap 基金折溢价仪表盘</title>
+    <link rel="stylesheet" href="{{ .CSSPath }}" />
+  </head>
+  <body>
+    {{ template "dashboard_shell" . }}
+    <script type="module" src="{{ .JSPath }}"></script>
+  </body>
+</html>
+{{ end }}

@@ -1,0 +1,10 @@
+services:
+  gogap:
+    image: ghcr.io/planet756/gogap:latest
+    container_name: gogap
+    hostname: gogap
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./gogap-data:/app/data
