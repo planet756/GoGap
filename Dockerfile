@@ -33,7 +33,8 @@ RUN set -eux; \
 
 FROM debian:trixie-slim
 
-LABEL org.opencontainers.image.authors="planet756"
+LABEL org.opencontainers.image.authors="planet756" \
+      org.opencontainers.image.source="https://github.com/planet756/GoGap"
 
 WORKDIR /app
 

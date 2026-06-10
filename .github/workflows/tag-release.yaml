@@ -24,10 +24,19 @@ jobs:
           set -eux
           version="$(sed -nE 's/^const appVersion = "([0-9]+\.[0-9]+\.[0-9]+)"$/\1/p' cmd/gogap/main.go)"
           test -n "$version"
+          changed="true"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            previous="$(git show '${{ github.event.before }}:cmd/gogap/main.go' 2>/dev/null | sed -nE 's/^const appVersion = "([0-9]+\.[0-9]+\.[0-9]+)"$/\1/p' || true)"
+            if [ "$previous" = "$version" ]; then
+              changed="false"
+            fi
+          fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
       - name: Create release tag
+        if: steps.version.outputs.changed == 'true'
         run: |
           set -eux
           tag="${{ steps.version.outputs.tag }}"
@@ -39,3 +48,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git tag -a "$tag" -m "GoGap ${{ steps.version.outputs.version }}"
           git push origin "$tag"
+
+      - name: Publish GitHub Release
+        if: steps.version.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: GoGap ${{ steps.version.outputs.version }}
