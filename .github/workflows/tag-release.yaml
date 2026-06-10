@@ -55,3 +55,4 @@ jobs:
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: GoGap ${{ steps.version.outputs.version }}
+          generate_release_notes: true
